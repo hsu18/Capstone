@@ -1,0 +1,95 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+    <title>세모자 : 세상의 모든 자격증!</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script type="text/javascript" src="/js/scripts.js"></script>
+</head>
+
+<!-- <body th:onload="test([[${category}]],[[${mini}]] )"> -->
+<body th:onload="text1()">
+<div class="header">
+    <div class="smLogo">
+        <!-- 로고 내에 home controller -->
+        <a href="/"> <img src="/images/logo.png" class="logoImg"> </a>
+    </div>
+
+    <form th:action="@{/search}" method="post">
+        <div class="upperSearchBar">
+            <div class="upperSearchInner">
+                <input class="upperSearch" name="searchname" type="text">
+            </div>
+            <button class="upperSearchIcon" type="submit"></button>
+        </div>
+    </form>
+
+    <div class="logDiv">
+        <ul class="logUl">
+            <!-- a 내에 login/logout controller -->
+            <li class="logLi"><a href="">LOGOUT</a></li>
+            <!-- a 내에 login/logout controller -->
+            <li class="logLi"><a href="/mypage?userid=1">MY PAGE</a></li>
+        </ul>
+    </div>
+</div>
+<div class="menuDiv">
+    <ul class="menuUl">
+        <li class="menuLi" th:each="c : ${allCategories}">
+            <a th:href="'/category/' + ${c.getCategoryName()} + '/0'" th:text="${c.getCategoryName()}"></a>
+        </li>
+    </ul>
+</div>
+<hr>
+<div class="certRec">
+    <span>관련 자격증: </span>
+    <a th:each="relatedCert : ${relatedCerts}" th:href="@{'/category?certid='+${relatedCert.id}+
+        '&userid=1'}" class="certRecA" th:text="${relatedCert.name}"></a>>
+</div>
+<div class="certBigName">
+    <span th:text="${allCert.cert.name}"></span>
+</div>
+<div class="tag">
+    <div class="tagBar" th:each="tag : ${tags}">
+        <a class="tag1" th:href="@{'/search/' + ${tag}}" th:text="'#'+${tag}"></a>
+    </div>
+</div>
+<div class="certDetail">
+    <span>자격명:</span>
+    <span class="certName" th:text="${allCert.cert.name}"></span><br>
+    <span>관련부처:</span>
+    <span class="certDepartment" th:text="${allCert.cert.ministry}"></span><br>
+    <span>시행기관:</span>
+    <span class="certInstitution" th:text="${allCert.cert.agency}"></span><br>
+    <span>비용:</span>
+    <span class="certCost" th:text="${allCert.cert.cost}"></span><br>
+</div>
+<div class="scheduleDiv">
+    <table class="scheduleTb">
+        <tr class="scheduleTr">
+            <td class="scheduleSortation">구분</td>
+            <td class="scheduleApplication">접수기간</td>
+            <td class="scheduleTest">시험일정</td>
+            <td class="schedulePass">합격자 발표기간</td>
+        </tr>
+        <tr class="scheduleTr" th:if="${allCert.dates.get(0).getApply().length() == 0}">
+            <td style="font-weight:bold" colspan="4">시험 정보가 없습니다.</td>
+        </tr>
+        <tr class="scheduleTr" th:each="date : ${allCert.dates}" th:if="${date.getApply().length() != 0}">
+            <td class="scheduleSortation" th:text="${date.division}"></td>
+            <td class="scheduleApplication" th:text="${date.apply}"></td>
+            <td class="scheduleTest" th:text="${date.date}"></td>
+            <td class="schedulePass" th:text="${date.notif}"></td>
+        </tr>
+    </table>
+</div>
+<div class="userRecBar">
+    <span>사람들이 함께 본</span>
+    <div th:each="recommendCert : ${recommandCerts}" >
+        <a th:href="@{'/category?certid='+${recommendCert.id}+'&userid=1'}"
+           th:text="${recommendCert.name}"></a>
+    </div>
+</div>
+</body>
+</html>

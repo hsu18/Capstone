@@ -1,0 +1,27 @@
+{
+  "properties": {
+    "name": {
+      "type": "text",
+      "analyzer": "one"
+    },
+    "ministry": {
+      "type": "text"
+    },
+    "agency": {
+      "type": "text"
+    },
+    "cost": {
+      "type": "text"
+    },
+    "tag": {
+      "type": "text",
+      "analyzer": "nori"
+    },
+    "views": {
+      "type": "long"
+    },
+    "modified_time": {
+      "type": "date"
+    }
+  }
+}

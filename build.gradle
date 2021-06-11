@@ -1,0 +1,46 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.4.3'
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+	compile 'mysql:mysql-connector-java'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.3'
+	implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.29.Final'
+	implementation group: 'org.springframework', name: 'spring-orm', version: '5.3.5'
+	implementation group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
+	implementation group: 'org.springframework.data', name: 'spring-data-elasticsearch', version: '3.2.12.RELEASE'
+
+	implementation group: 'org.elasticsearch', name: 'elasticsearch', version: '6.8.13'
+	implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '6.8.13'
+	implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-client', version: '6.8.13'
+	implementation group: 'org.elasticsearch.client', name: 'transport', version: '6.8.13'
+	implementation group: 'org.elasticsearch.plugin', name: 'transport-netty4-client', version: '6.8.13'
+
+}
+
+test {
+	useJUnitPlatform()
+}

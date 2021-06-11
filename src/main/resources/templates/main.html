@@ -1,0 +1,45 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>세모자 : 세상의 모든 자격증!</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div>
+    <div class="header">
+        <div class="smLogo">
+            <!-- 로고 내에 home controller -->
+            <a href="/"> <img src="images/logo.png" class="logoImg" alt="X"> </a>
+        </div>
+        <div class="logDiv">
+            <ul class="logUl">
+                <!-- a 내에 login/logout controller -->
+                <li class="logLi"><a href="">LOGOUT</a></li>
+                <!-- a 내에 login/logout controller -->
+                <li class="logLi"><a href="/mypage?userid=1">MY PAGE</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="menuDiv">
+        <ul class="menuUl">
+            <li class="menuLi" th:each="c : ${allCategories}">
+                <a th:href="'/category/' + ${c.getCategoryName()} + '/0'" th:text="${c.getCategoryName()}"></a>
+            </li>
+        </ul>
+    </div>
+    <form th:action="@{/search}" method="post">
+        <div class="mainSearchBar">
+            <div class="mainSearchInner">
+                <input class="mainSearch" name="searchname" type="text">
+            </div>
+            <button class="mainSearchIcon" type="submit"></button>
+        </div>
+    </form>
+    <div class="banner">
+        <h2 class="bannerSpan">내 관심분야와 <br>어울리는 자격증은?</h2>
+        <a class="bannerA" href="/mypage?userid=1"> 알아보기 ></a>
+    </div>
+</div>
+</body>
+</html>

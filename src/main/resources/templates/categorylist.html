@@ -1,0 +1,163 @@
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>세모자 : 세상의 모든 자격증!</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script type="text/javascript" src="/js/scripts.js"></script>
+</head>
+
+<body th:onload="test([[${category}]],[[${mini}]])">
+<div class="header">
+    <div class="smLogo">
+        <!-- 로고 내에 home controller -->
+        <a href="/"> <img src="/images/logo.png" class="logoImg"> </a>
+    </div>
+
+    <form th:action="@{/search}" method="post">
+        <div class="upperSearchBar">
+            <div class="upperSearchInner">
+                <input class="upperSearch" name="searchname" type="text">
+            </div>
+            <button class="upperSearchIcon" type="submit"></button>
+        </div>
+    </form>
+
+    <div class="logDiv">
+        <ul class="logUl">
+            <!-- a 내에 login/logout controller -->
+            <li class="logLi"><a href="">LOGOUT</a></li>
+            <!-- a 내에 login/logout controller -->
+            <li class="logLi"><a href="/mypage?userid=1">MY PAGE</a></li>
+        </ul>
+    </div>
+</div>
+<div class="menuDiv">
+    <ul class="menuUl">
+        <li class="menuLi" th:each="c : ${allCategories}">
+            <a th:href="'/category/' + ${c.getCategoryName()} + '/0'" th:text="${c.getCategoryName()}"></a>
+        </li>
+    </ul>
+</div>
+<!-- 여기는 나중에 thymeleaf로 div 개수와 안에 들어갈 text 구현 -->
+<hr th:if="${category.length() == 0 || subs == null}">
+<div class="categoryBar" th:if="${category.length() != 0 && subs != null}">
+    <ul class="miniCateUl">
+        <li class="miniCategory">
+            <a th:href="@{'/category/' + ${category} + '/0'}" th:text="전체"></a>
+        </li>
+        <li class="miniCategory" th:each="s : ${subs}" th:with="index = ${subs.indexOf(s)}" >
+            <a th:href="@{'/category/' + ${category} + '/' + ${index+1}}" th:text="${s}"></a>
+        </li>
+    </ul>
+</div>
+
+<div class="searchText" th:if="${searchword.length()} != 0">
+    <h2><span class="chText2" th:if="${category.length()} != 0" th:text="${category}"></span>
+        <span th:if="${category.length()} != 0"> 카테고리의 </span>
+        <span class="chText">"
+            <span th:text="${searchword}"></span>
+            "</span>에 대한 검색 결과입니다.
+        <span th:text="${'(' + certs.size() + '건)'}"></span>
+    </h2>
+</div>
+<div class="searchText" th:if="${searchword.length() == 0 && category.length() != 0}">
+    <h2>
+        <span class="chText2" th:text="${category}"></span>
+        카테고리의 자격증입니다.
+        <span th:text="${'(' + certs.size() + '건)'}"></span>
+    </h2>
+</div>
+<div class="searchText" th:if="${tag.length()} != 0">
+    <h2>
+        <span class="chText" th:text="${'#' + tag}"></span><span> 태그에 대한 검색 결과입니다.</span>
+        <span th:text="${'(' + certs.size() + '건)'}"></span>
+    </h2>
+</div>
+<div class="searchText">
+    <h2><span th:if="${pagedCerts.getContent().size == 0}">검색 결과가 없습니다.</span></h2>
+</div>
+
+<form th:if="${category.length() != 0}" th:action="@{'/'+${category}+'/search'}" method="post">
+    <div class="detailSearchBar">
+        <div class="detailSearchInner">
+            <input class="detailSearch" name="searchname" type="text">
+            <input type="hidden" name="mini" th:value="${mini}">
+        </div>
+        <button class="detailSearchIcon" type="submit"></button>
+    </div>
+</form>
+
+<div class="certDiv">
+    <table class="certTb">
+        <tr class="certTr">
+            <td class="certTdName">자격증 이름</td>
+            <td class="certTdNum">조회수</td>
+            <td class="certTdDetail"></td>
+        </tr>
+        <tr class="certTr" th:each="cert : ${pagedCerts}">
+            <td class="certTdName" th:text="${cert.name}"></td>
+            <td class="certTdNum" th:text="${cert.views}"></td>
+            <td class="certTdDetail">
+                <div class="detailA"><a th:href="@{'/category?certid='+${cert.id}+'&userid=1'}">상세보기</a></div>
+            </td>
+        </tr>
+    </table>
+    <div class="certPage" th:with="start=${(pagedCerts.number/maxPage)*maxPage + 1},
+            end=(${(pagedCerts.totalPages == 0) ? 1 : (start + (maxPage - 1) < pagedCerts.totalPages ? start + (maxPage - 1) : pagedCerts.totalPages)})">
+
+        <button th:if="${start > 1}">
+            <a th:if="${searchword.length() == 0}"
+               th:href="@{'/category/' + ${category} + '/' + ${mini} + '?page='+${start - maxPage - 1}}"
+               th:text="'<'"></a>
+
+            <a th:if="${category.length() != 0 && searchword.length() != 0}"
+               th:href="@{'/' + ${category} + '/search?page=' + ${start - maxPage} + '&searchname=' + ${searchword} + '&mini=' + ${mini}}"
+               th:text="'<'">
+            </a>
+
+            <a th:if="${category.length() == 0 && tag.length() == 0}"
+               th:href="@{'/search?page=' + ${start - maxPage} + '&searchname=' + ${searchword}}"
+               th:text="'<'">
+            </a>
+        </button>
+
+        <span th:each="page: ${#numbers.sequence(start, end)}">
+            <span class="page" th:if="${selpage == page - 1}" style="font-weight:bold" th:text="${page}"></span>
+
+            <span th:unless="${selpage == page - 1}">
+                <a class="page" th:if="${searchword.length() == 0}"
+                   th:href="@{'/category/' + ${category} + '/' + ${mini} + '?page='+${page - 1}}"
+                   th:text="${page}"></a>
+
+                <a class="page" th:if="${category.length() != 0 && searchword.length() != 0}"
+                   th:href="@{'/' + ${category} + '/search?page=' + ${page - 1} + '&searchname=' + ${searchword} + '&mini=' + ${mini}}"
+                   th:text="${page}">
+                </a>
+
+                <a class="page" th:if="${category.length() == 0 && tag.length() == 0}"
+                   th:href="@{'/search?page=' + ${page - 1} + '&searchname=' + ${searchword}}"
+                   th:text="${page}">
+                </a>
+            </span>
+        </span>
+
+        <button th:if="${end < pagedCerts.totalPages}">
+            <a th:if="${searchword.length() == 0}"
+               th:href="@{'/category/' + ${category} + '/' + ${mini} + '?page='+${start + maxPage - 1}}"
+               th:text="'>'"></a>
+
+            <a th:if="${category.length() != 0 && searchword.length() != 0}"
+               th:href="@{'/' + ${category} + '/search?page=' + ${start + maxPage - 1} + '&searchname=' + ${searchword} + '&mini=' + ${mini}}"
+               th:text="'>'">
+            </a>
+
+            <a th:if="${category.length() == 0 && tag.length() == 0}"
+               th:href="@{'/search?page=' + ${start + maxPage - 1} + '&searchname=' + ${searchword}}"
+               th:text="'>'">
+            </a>
+        </button>
+    </div>
+</div>
+</body>
+</html>

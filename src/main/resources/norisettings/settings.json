@@ -1,0 +1,51 @@
+{
+  "index": {
+    "analysis": {
+      "analyzer": {
+        "nori": {
+          "tokenizer": "nori_user_dict",
+          "filter": [
+            "my_nori_filter",
+            "stop_filter",
+            "unique",
+            "nori_readingform"
+          ]
+        },
+        "one": {
+          "tokenizer": "nori_user_dict",
+          "filter": [
+            "synonym"
+          ]
+        }
+      },
+      "tokenizer": {
+        "nori_user_dict": {
+          "type": "nori_tokenizer",
+          "user_dictionary": "dict.txt",
+          "decompound_mode": "none"
+        }
+      },
+      "filter": {
+        "my_nori_filter": {
+          "type": "nori_part_of_speech",
+          "stoptags": [
+            "SP", "VV", "E", "UNA", "UNKNOWN", "SH"
+          ]
+        },
+        "one_filter": {
+          "type": "ngram",
+          "min_gram": 1,
+          "max_gram": 1
+        },
+        "stop_filter": {
+          "type" : "stop",
+          "stopwords_path":"stop_dict.txt"
+        },
+        "synonym": {
+          "type": "synonym",
+          "synonyms_path": "synonym.txt"
+        }
+      }
+    }
+  }
+}

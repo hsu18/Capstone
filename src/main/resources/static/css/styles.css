@@ -1,0 +1,545 @@
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h2 {
+    font-size: 24px;
+    padding: 10px 0 0 10px;
+}
+
+/***************** home.html *****************/
+
+.header {
+    position: relative;
+    width: 1050px;
+    height: 80px;
+    margin: 0 auto;
+}
+.smLogo {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+.logDiv {
+    top: 20px;
+    position: absolute;
+    right: 0;
+}
+li.logLi, li.menuLi, li.miniCategory {
+    float: left;
+    text-align: center;
+    display: inline-block;
+}
+li.logLi:first-child:before,  li.menuLi:first-child:before{
+    display: none;
+}
+li.logLi:before {
+    content: "|";
+    font-size:18px;
+    line-height: 18px;
+    padding: 0 20px 0 20px;
+}
+.menuDiv {
+    position: relative;
+    width: 1050px;
+    height: 80px;
+    margin: 0 auto;
+    text-align: center;
+}
+ul.menuUl, ul.miniCateUl{
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    padding: 0;
+    top: 50%;
+}
+ul.menuUl {
+    margin-top: -9px;
+}
+li.menuLi:before {
+    content: "|";
+    font-size:18px;
+    line-height: 18px;
+    width: 210px;
+    padding: 0 10px 0 10px;
+}
+
+.mainSearchBar {
+    width:920px;
+    height:50px;
+    background-color: #74b4e2;
+    margin: 0 auto;
+    border-radius: 80px;
+}
+.mainSearchInner {
+    background-color: white;
+    float: left;
+    width:800px;
+    height:46px;
+    margin: 2px 0 2px 2px;
+    border-top-left-radius:80px;
+    border-bottom-left-radius:80px;
+}
+.mainSearch {
+    width:800px;
+    height:46px;
+    padding: 0 30px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+.mainSearchIcon {
+    border: 0;
+    outline: 0;
+    float: left;
+    width:115px;
+    height:46px;
+    margin: 2px 2px 2px 0;
+    border-top-right-radius:80px;
+    border-bottom-right-radius:80px;
+    cursor: pointer;
+    background-image: url("../images/searchIcon.png");
+    background-repeat: no-repeat;
+}
+.banner {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    top: 20px;
+    margin: 0 auto;
+    background-image: url("../images/banner.png");
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.bannerSpan {
+    display: block;
+    font-weight: bolder;
+    color: white;
+    font-size: 48px;
+    width: 100%;
+    position: relative;
+    left: 10%;
+    top: 10%;
+}
+.bannerA {
+    display: block;
+    border: 0;
+    outline: 0;
+    width:160px;
+    height:56px;
+    position:relative;
+    left:10%;
+    top: 10px;
+    border-radius:10px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align:center;
+    background-color: white;
+    line-height: 56px;
+}
+
+
+
+
+
+/***************** list.html *****************/
+
+.categoryBar {
+    top: 0;
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #DCE0E3;
+}
+ul.miniCateUl {
+    margin-top: -23px;
+}
+.miniCategory {
+    position: relative;
+    width:140px;
+    height:46px;
+    line-height: 46px;
+    background-color: white;
+    border-radius:10px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align:center;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+
+.miniCategory a {
+    display: block;
+    width:140px;
+    height:46px;
+}
+
+.detailSearchBar {
+    position: relative;
+    top: 30px;
+    left: 150px;
+    width:400px;
+    height:40px;
+    background-color: black;
+    margin: 0 auto;
+}
+.detailSearchInner {
+    background-color: white;
+    float: left;
+    width:340px;
+    height:36px;
+    margin: 2px 0 2px 2px;
+}
+.detailSearch {
+    width:370px;
+    height:36px;
+    padding: 0 30px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+}
+.detailSearchIcon {
+    border: 0;
+    outline: 0;
+    float: left;
+    width:56px;
+    height:36px;
+    margin: 2px 2px 2px 0;
+    cursor: pointer;
+    background-image: url("../images/detailSearchIcon.png");
+    background-repeat: no-repeat;
+}
+.certDiv {
+    position: relative;
+    width: 1050px;
+    height: 80px;
+    top: 40px;
+    margin: 0 auto;
+}
+.certTb {
+    text-align: center;
+    margin: 0 auto;
+}
+.certTdName, .certTdNum, .certTdDetail {
+    border-bottom: 1px solid #C4C4C4;
+    padding: 15px 10px;
+}
+.certTdName {
+    width: 400px;
+}
+.certTdNum {
+    width: 150px;
+}
+.certTdDetail {
+    width: 200px;
+}
+.detailA {
+    background-color: #74b4e2;
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+.detailA a {
+    color: white;
+}
+.certPage {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px 0 60px 0;
+
+
+}
+
+.certPage button {
+    border: 0;
+    background-color: white;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.upperSearchBar{
+    position: relative;
+    margin: 0 auto;
+    top: 25px;
+    right: 50px;
+    background-color: red;
+    width:700px;
+    height:40px;
+    background-color: #74b4e2;
+    border-radius: 80px;
+}
+
+
+.upperSearchInner {
+    background-color: white;
+    float: left;
+    width:640px;
+    height:36px;
+    margin: 2px 0 2px 2px;
+    border-top-left-radius:80px;
+    border-bottom-left-radius:80px;
+}
+.upperSearch {
+    width:670px;
+    height:36px;
+    padding: 0 30px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+.upperSearchIcon {
+    border: 0;
+    outline: 0;
+    float: left;
+    width:56px;
+    height:36px;
+    margin: 2px 2px 2px 0;
+    border-top-right-radius:80px;
+    border-bottom-right-radius:80px;
+    cursor: pointer;
+    background-image: url("../images/upperSearchIcon.png");
+    background-repeat: no-repeat;
+}
+
+
+
+/***************** detail.html *****************/
+
+.certRec {
+    width: 100%;
+    text-align: center;
+    margin: 40px auto 0;
+    font-size: 14px;
+    color: #C4C4C4;
+}
+
+.certRecA {
+    color: #74b4e2;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+.certBigName {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin: 5px 0;
+    font-size: 36px;
+}
+
+.tag {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tagBar {
+    display: inline-block;
+    margin: 0 6px 20px 0;
+    background-color: #C4C4C4;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 80px;
+}
+
+.tag {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tagBar {
+    display: inline-block;
+    margin: 0 6px 20px 0;
+    background-color: #C4C4C4;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 80px;
+}
+
+.certDetail {
+    width: 700px;
+    margin: 0 auto;
+    font-size: 20px;
+}
+.certDetail span {
+    padding: 4px 0;
+    display: inline-block;
+}
+
+.scheduleDiv{
+    width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 0 60px 0;
+}
+
+.scheduleTb {
+    text-align: center;
+    margin: 0 auto;
+    /*border: black 1px solid;*/
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.scheduleTb td {
+    border: 1px solid black;
+}
+
+.scheduleSortation {
+    width: 100px;
+    padding: 5px 20px;
+}
+.scheduleApplication {
+    width: 140px;
+    padding: 5px 60px;
+}
+.scheduleTest {
+    width: 120px;
+    padding: 5px;
+}
+.schedulePass {
+    width: 120px;
+    padding: 5px;
+}
+
+.userRecBar {
+    /*display: inline-block;*/
+    position: fixed;
+    /*margin: 2.5vw;*/
+    width: 10vw;
+    top: 260px;
+    right: 4vw;
+    bottom: 5vh;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #DCE0E3;
+    font-size: 2.5vh;
+}
+
+.userRecBar div {
+    display: block;
+    width: 80%;
+    height: 25%;
+    background-color: #DCE0E3;
+    box-shadow: 3px 3px 10px #DCE0E3;
+    margin: 2.5vmin auto;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.userRecBar a {
+    position: relative;
+    font-size: 2vh;
+    top: 40%;
+}
+
+/***************** myPage.html *****************/
+.nav {
+    width: 1050px;
+    margin: 0 auto;
+}
+
+.chText {
+    font-size: 36px;
+    color: #74b4e2;
+}
+
+.chText2 {
+    color: #74b4e2;
+}
+
+.userRecBox {
+    margin: 0 auto;
+    width: 850px;
+    padding-bottom: 60px;
+}
+
+.userRecBox > div{
+    display: inline-block;
+    background-color: white;
+    width: 400px;
+    height: 120px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px #DCE0E3;
+}
+
+.userRecName {
+    position: relative;
+    left: 20px;
+    top: 20px;
+    font-size: 28px;
+}
+.userRecBox .detailA {
+    margin: 0;
+    position: relative;
+    left: 280px;
+    top: 32px;
+    text-align: center;
+}
+
+.searchText h2 {
+    text-align: center;
+}
+
+
+.searchSearchBar {
+    width:920px;
+    height:50px;
+    background-color: black;
+    margin: 0 auto;
+}
+.searchSearchInner {
+    background-color: white;
+    float: left;
+    width:800px;
+    height:46px;
+    margin: 2px 0 2px 2px;
+}
+.searchSearch {
+    width:800px;
+    height:46px;
+    padding: 0 30px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+.searchSearchIcon {
+    border: 0;
+    outline: 0;
+    float: left;
+    width:115px;
+    height:46px;
+    margin: 2px 2px 2px 0;
+    cursor: pointer;
+    background-image: url("../images/blackSearchIcon.png");
+    background-repeat: no-repeat;
+}
+
+.page {
+    margin-left: 10px;
+    margin-right: 10px;
+}

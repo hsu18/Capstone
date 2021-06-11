@@ -1,0 +1,91 @@
+
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+    <title>세모자 : 세상의 모든 자격증!</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body>
+<div class="header">
+    <div  class="smLogo">
+        <!-- 로고 내에 home controller -->
+        <a href="/"> <img src="images/logo.png" class="logoImg"> </a>
+    </div>
+
+    <form th:action="@{/search}" method="post">
+        <div class="upperSearchBar">
+            <div class="upperSearchInner">
+                <input class="upperSearch" name="searchname" type="text">
+            </div>
+            <button class="upperSearchIcon" type="submit"></button>
+        </div>
+    </form>
+
+    <div class="logDiv">
+        <ul class="logUl">
+            <!-- a 내에 login/logout controller -->
+            <li class="logLi"><a href="">LOGOUT</a></li>
+            <!-- a 내에 login/logout controller -->
+            <li class="logLi"><a th:href="'/mypage?userid=' + ${userid}">MY PAGE</a></li>
+        </ul>
+    </div>
+</div>
+<div class="menuDiv">
+    <ul class="menuUl">
+        <li class="menuLi" th:each="c : ${allCategories}">
+            <a th:href="'/category/' + ${c.getCategoryName()} + '/0'" th:text="${c.getCategoryName()}"></a>
+        </li>
+    </ul>
+</div>
+<hr>
+<div class="nav">
+    <div class="recText">
+        <h2>당신의 <span class="chText">"종합"</span> 추천 자격증이에요.</h2>
+    </div>
+    <div class="userRecBox">
+        <div class="userRecBox1" th:each="userRecCert : ${userRecCerts}">
+            <span class="userRecName" th:text="${userRecCert.getName()}"></span>
+            <div class="detailA"><a th:href="@{'/category?certid='+${userRecCert.getId()}+'&userid=1'}">상세보기</a></div>
+        </div>
+        <!--<<div class="userRecBox2">
+            <span class="userRecName" th:text="${userRecCert.getName()}"></span>
+            <div class="detailA"><a href="detail.html">상세보기</a></div>
+        </div>
+        div class="userRecBox3">
+            <span class="userRecName">자격증 C</span>
+            <div class="detailA"><a href="detail.html">상세보기</a></div>
+        </div>
+        <div class="userRecBox4">
+            <span class="userRecName">자격증 D</span>
+            <div class="detailA"><a href="detail.html">상세보기</a></div>
+        </div>
+    </div>
+    <hr>
+    <div class="recText">
+        <h2>당신의 <span class="chText">"직업별"</span> 추천 자격증이에요.</h2>
+    </div>
+    <div class="userRecBox">
+        <div class="userRecBox1">
+            <span class="userRecName">자격증 A</span>
+            <div class="detailA"><a href="detail.html">상세보기</a></div>
+        </div>
+        <div class="userRecBox2">
+            <span class="userRecName">자격증 B</span>
+            <div class="detailA"><a href="detail.html">상세보기</a></div>
+        </div>
+        <div class="userRecBox3">
+            <span class="userRecName">자격증 C</span>
+            <div class="detailA"><a href="detail.html">상세보기</a></div>
+        </div>
+        <div class="userRecBox4">
+            <span class="userRecName">자격증 D</span>
+            <div class="detailA"><a href="detail.html">상세보기</a></div>
+        </div>-->
+    </div>
+</div>
+</body>
+</html>
