@@ -107,7 +107,11 @@
             end=(${(pagedCerts.totalPages == 0) ? 1 : (start + (maxPage - 1) < pagedCerts.totalPages ? start + (maxPage - 1) : pagedCerts.totalPages)})">
 
         <button th:if="${start > 1}">
-            <a th:if="${searchword.length() == 0}"
+            <a th:if="${searchword.length() == 0 && category.length() == 0}"
+               th:href="@{'/search/' + ${tag} + '?page='+${start - maxPage - 1}}"
+               th:text="'<'"></a>
+
+            <a th:if="${searchword.length() == 0 && category.length() != 0}"
                th:href="@{'/category/' + ${category} + '/' + ${mini} + '?page='+${start - maxPage - 1}}"
                th:text="'<'"></a>
 
@@ -126,7 +130,11 @@
             <span class="page" th:if="${selpage == page - 1}" style="font-weight:bold" th:text="${page}"></span>
 
             <span th:unless="${selpage == page - 1}">
-                <a class="page" th:if="${searchword.length() == 0}"
+                <a class="page" th:if="${searchword.length() == 0 && category.length() == 0}"
+                   th:href="@{'/search/' + ${tag} + '?page='+${page - 1}}"
+                   th:text="${page}"></a>
+
+                <a class="page" th:if="${searchword.length() == 0 && category.length() != 0}"
                    th:href="@{'/category/' + ${category} + '/' + ${mini} + '?page='+${page - 1}}"
                    th:text="${page}"></a>
 
@@ -143,7 +151,11 @@
         </span>
 
         <button th:if="${end < pagedCerts.totalPages}">
-            <a th:if="${searchword.length() == 0}"
+            <a th:if="${searchword.length() == 0 && category.length() == 0}"
+               th:href="@{'/search/' + ${tag} + '?page='+${start + maxPage - 1}}"
+               th:text="'>'"></a>
+
+            <a th:if="${searchword.length() == 0 && category.length() != 0}"
                th:href="@{'/category/' + ${category} + '/' + ${mini} + '?page='+${start + maxPage - 1}}"
                th:text="'>'"></a>
 

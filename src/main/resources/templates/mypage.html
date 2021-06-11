@@ -44,7 +44,10 @@
 <hr>
 <div class="nav">
     <div class="recText">
-        <h2>당신의 <span class="chText">"종합"</span> 추천 자격증이에요.</h2>
+        <h2>당신의 <span class="chText">"종합"</span> 추천 자격증입니다.</h2>
+    </div>
+    <div class="recText">
+        <h2 th:if="${userRecCerts.size() == 0}">추천 자격증이 없습니다.</h2>
     </div>
     <div class="userRecBox">
         <div class="userRecBox1" th:each="userRecCert : ${userRecCerts}">

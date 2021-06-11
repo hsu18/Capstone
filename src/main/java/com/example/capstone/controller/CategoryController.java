@@ -41,7 +41,7 @@ public class CategoryController {
         this.categoryService = categoryService;
         this.crawlingService = crawlingService;
         crawlingService.init_Category();
-        crawlingService.crawling();
+        //crawlingService.crawling();
     }
 
     // 메인 페이지 mapping

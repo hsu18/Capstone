@@ -45,7 +45,7 @@
 <div class="certRec">
     <span>관련 자격증: </span>
     <a th:each="relatedCert : ${relatedCerts}" th:href="@{'/category?certid='+${relatedCert.id}+
-        '&userid=1'}" class="certRecA" th:text="${relatedCert.name}"></a>>
+        '&userid=1'}" class="certRecA" th:text="${relatedCert.name}"></a>
 </div>
 <div class="certBigName">
     <span th:text="${allCert.cert.name}"></span>
@@ -64,6 +64,8 @@
     <span class="certInstitution" th:text="${allCert.cert.agency}"></span><br>
     <span>비용:</span>
     <span class="certCost" th:text="${allCert.cert.cost}"></span><br>
+    <span class="certUrl">관련 URL:</span>
+    <a target="_blank" class="certUrl certRecA" th:href="@{${allCert.cert.url}}" th:text="${allCert.cert.url}"></a><br>
 </div>
 <div class="scheduleDiv">
     <table class="scheduleTb">

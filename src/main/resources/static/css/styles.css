@@ -328,7 +328,7 @@ ul.miniCateUl {
     text-align: center;
     margin: 40px auto 0;
     font-size: 14px;
-    color: #C4C4C4;
+    color: #808080;
 }
 
 .certRecA {
@@ -380,6 +380,11 @@ ul.miniCateUl {
     margin: 0 auto;
     font-size: 20px;
 }
+
+.certUrl {
+    font-size: 15px;
+}
+
 .certDetail span {
     padding: 4px 0;
     display: inline-block;
@@ -469,6 +474,10 @@ ul.miniCateUl {
     color: #74b4e2;
 }
 
+.recText{
+    text-align: center;
+}
+
 .userRecBox {
     margin: 0 auto;
     width: 850px;
@@ -489,7 +498,7 @@ ul.miniCateUl {
     position: relative;
     left: 20px;
     top: 20px;
-    font-size: 28px;
+    font-size: 20px;
 }
 .userRecBox .detailA {
     margin: 0;

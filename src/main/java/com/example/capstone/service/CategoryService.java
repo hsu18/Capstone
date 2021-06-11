@@ -147,7 +147,8 @@ public class CategoryService {
 
     public Page<EsCert> getEsCertsByCategory(int startAt, String category){
         Pageable pageable = PageRequest.of(startAt, 10);
-        return esCertRepository.findEsCertsByMain(pageable, category);
+        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
+        return esCertRepository.findEsCertsByMain(pageable2, category);
     }
 
     public Page<EsCert> getEsCertsByCategory(int startAt, String category, int mini){
@@ -155,31 +156,35 @@ public class CategoryService {
         String sub = subs.get(mini - 1);
 
         Pageable pageable = PageRequest.of(startAt, 10);
-        return esCertRepository.findEsCertsBySub(pageable, sub);
+        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
+        return esCertRepository.findEsCertsBySub(pageable2, sub);
     }
 
     public Page<EsCert> getEsCertsByTag(int startAt, String tag){
         Pageable pageable = PageRequest.of(startAt, 10);
-        return esCertRepository.findEsCertsByTag(pageable, tag);
+        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
+        return esCertRepository.findEsCertsByTag(pageable2, tag);
     }
 
     public Page<EsCert> getEsCertsByName(int startAt, String name){
         Pageable pageable = PageRequest.of(startAt, 10);
-        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"_score")));
+        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
         Pageable pageable3 = PageRequest.of(startAt, 10, Sort.by("_score").descending());
-        return esCertRepository.findEsCertsByName(pageable3, name);
+        return esCertRepository.findEsCertsByName(pageable2, name);
     }
 
     public Page<EsCert> searchEsCertsByCategory(int startAt, String searchname, String category){
         Pageable pageable = PageRequest.of(startAt, 10);
-        return esCertRepository.findEsCertByNameAndMain(pageable, searchname, category);
+        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
+        return esCertRepository.findEsCertByNameAndMain(pageable2, searchname, category);
     }
     public Page<EsCert> searchEsCertsByCategory(int startAt, String searchname, String category, int mini){
         List<String> subs = crawlingService.findSubs(category);
         String sub = subs.get(mini - 1);
 
         Pageable pageable = PageRequest.of(startAt, 10);
-        return esCertRepository.findEsCertByNameAndSub(pageable, searchname, sub);
+        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
+        return esCertRepository.findEsCertByNameAndSub(pageable2, searchname, sub);
     }
 
     // 연관자격증 알고리즘
@@ -239,7 +244,6 @@ public class CategoryService {
         for(EsView view : esViews){
             if (view.getUserid() == Integer.parseInt(userid)) continue;
             recViews.addAll(esViewRepository.findEsViewsByUserid(view.getUserid())); // 자격증을 본 user id
-            System.out.println(view.getUserid());
         }
 
         HashMap<String, Integer> recommendCount = new HashMap<>();
@@ -259,10 +263,6 @@ public class CategoryService {
                 return o1.getValue() < o2.getValue() ? 1 : -1;
             }
         });
-
-        /*for(Map.Entry<String, Integer> recommend_unit : recommendSort){
-            System.out.println(esCertRepository.findEsCertById(recommend_unit.getKey()).getName() + " : " + recommend_unit.getValue());
-        }*/
 
         List<Cert> certs = new ArrayList<>();
 
@@ -328,13 +328,11 @@ public class CategoryService {
                 return o1.getValue() < o2.getValue() ? 1 : -1;
             }
         });
-        System.out.println(usrRecSort);
 
         List<Cert> certs = new ArrayList<>();
         for (Map.Entry c : usrRecSort) {
-            //if(c.getKey().equals(esCertRepository.findEsCertById(certid).getId())) continue;
-            //if(certs.size() >= 3) break;
             certs.add(new Cert(esCertRepository.findEsCertById(c.getKey().toString())));
+            if(certs.size() >= 6) break;
         }
 
         return certs;

@@ -2,7 +2,8 @@
   "properties": {
     "name": {
       "type": "text",
-      "analyzer": "one"
+      "analyzer": "one",
+      "fielddata": true
     },
     "ministry": {
       "type": "text"
