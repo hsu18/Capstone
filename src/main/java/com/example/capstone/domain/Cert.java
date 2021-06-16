@@ -25,6 +25,12 @@ public class Cert {
     private String tag; //태그
     private int views; //조회수
     private String url; //크롤링url
+    @Column(columnDefinition = "TEXT")
+    private String summary;
+    @Column(columnDefinition = "TEXT")
+    private String duty;
+    @Column(columnDefinition = "TEXT")
+    private String career;
 
     @Transient
     @OneToMany(mappedBy = "cert", cascade=CascadeType.ALL)
@@ -54,5 +60,8 @@ public class Cert {
         sub = esCert.getSub();
         modified_time = esCert.getModified_time();
         url = esCert.getUrl();
+        summary = esCert.getSummary();
+        duty = esCert.getDuty();
+        career = esCert.getCareer();
     }
 }

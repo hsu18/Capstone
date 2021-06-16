@@ -4,7 +4,8 @@
     <meta charset="utf-8">
 
     <title>세모자 : 세상의 모든 자격증!</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Myeongjo:wght@800&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
 
 </head>
@@ -54,40 +55,6 @@
             <span class="userRecName" th:text="${userRecCert.getName()}"></span>
             <div class="detailA"><a th:href="@{'/category?certid='+${userRecCert.getId()}+'&userid=1'}">상세보기</a></div>
         </div>
-        <!--<<div class="userRecBox2">
-            <span class="userRecName" th:text="${userRecCert.getName()}"></span>
-            <div class="detailA"><a href="detail.html">상세보기</a></div>
-        </div>
-        div class="userRecBox3">
-            <span class="userRecName">자격증 C</span>
-            <div class="detailA"><a href="detail.html">상세보기</a></div>
-        </div>
-        <div class="userRecBox4">
-            <span class="userRecName">자격증 D</span>
-            <div class="detailA"><a href="detail.html">상세보기</a></div>
-        </div>
-    </div>
-    <hr>
-    <div class="recText">
-        <h2>당신의 <span class="chText">"직업별"</span> 추천 자격증이에요.</h2>
-    </div>
-    <div class="userRecBox">
-        <div class="userRecBox1">
-            <span class="userRecName">자격증 A</span>
-            <div class="detailA"><a href="detail.html">상세보기</a></div>
-        </div>
-        <div class="userRecBox2">
-            <span class="userRecName">자격증 B</span>
-            <div class="detailA"><a href="detail.html">상세보기</a></div>
-        </div>
-        <div class="userRecBox3">
-            <span class="userRecName">자격증 C</span>
-            <div class="detailA"><a href="detail.html">상세보기</a></div>
-        </div>
-        <div class="userRecBox4">
-            <span class="userRecName">자격증 D</span>
-            <div class="detailA"><a href="detail.html">상세보기</a></div>
-        </div>-->
     </div>
 </div>
 </body>

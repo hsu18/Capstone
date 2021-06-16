@@ -2,7 +2,7 @@
   "properties": {
     "name": {
       "type": "text",
-      "analyzer": "one",
+      "analyzer": "syn",
       "fielddata": true
     },
     "ministry": {
@@ -23,6 +23,24 @@
     },
     "modified_time": {
       "type": "date"
+    },
+    "main": {
+      "type": "text"
+    },
+    "sub": {
+      "type": "text"
+    },
+    "summary": {
+      "type": "text",
+      "analyzer": "info_nori"
+    },
+    "duty": {
+      "type": "text",
+      "analyzer": "info_nori"
+    },
+    "career": {
+      "type": "text",
+      "analyzer": "info_nori"
     }
   }
 }

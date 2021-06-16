@@ -2,12 +2,14 @@
 <head>
     <meta charset="utf-8">
     <title>세모자 : 세상의 모든 자격증!</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Myeongjo:wght@800&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
-    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script type="text/javascript" src="/js/scripts.js">
+    </script>
 </head>
 
-<body th:onload="test([[${category}]],[[${mini}]])">
+<body th:onload="textBold([[${searchword}]]), test([[${category}]],[[${mini}]])">
 <div class="header">
     <div class="smLogo">
         <!-- 로고 내에 home controller -->
@@ -99,7 +101,12 @@
             <td class="certTdName" th:text="${cert.name}"></td>
             <td class="certTdNum" th:text="${cert.views}"></td>
             <td class="certTdDetail">
-                <div class="detailA"><a th:href="@{'/category?certid='+${cert.id}+'&userid=1'}">상세보기</a></div>
+                <div class="detailA">
+                    <a th:if="${searchword.length() == 0}" th:href="@{'/category?certid='+${cert.id}+'&userid=1'}">상세보기</a>
+                    <a th:unless="${searchword.length() == 0}"
+                       th:href="@{'/category?certid='+${cert.id}+'&userid=1&searchname=' +
+                       ${searchword}}">상세보기</a>
+                </div>
             </td>
         </tr>
     </table>

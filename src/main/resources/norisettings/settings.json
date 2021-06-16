@@ -11,10 +11,17 @@
             "nori_readingform"
           ]
         },
-        "one": {
+        "syn": {
           "tokenizer": "nori_user_dict",
           "filter": [
             "synonym"
+          ]
+        },
+        "info_nori": {
+          "tokenizer": "nori_info_dict",
+          "filter": [
+            "info_filter",
+            "info_stop_filter"
           ]
         }
       },
@@ -22,6 +29,11 @@
         "nori_user_dict": {
           "type": "nori_tokenizer",
           "user_dictionary": "dict.txt",
+          "decompound_mode": "none"
+        },
+        "nori_info_dict": {
+          "type": "nori_tokenizer",
+          "user_dictionary": "info_dict.txt",
           "decompound_mode": "none"
         }
       },
@@ -44,6 +56,18 @@
         "synonym": {
           "type": "synonym",
           "synonyms_path": "synonym.txt"
+        },
+        "info_filter": {
+          "type": "nori_part_of_speech",
+          "stoptags": [
+            "J", "NR", "VCP", "VCN", "MAJ","NP","XSN","XSV","SP", "VV", "E",
+            "UNA", "UNKNOWN", "SH", "NNB", "MM", "MAG","VX", "XSA", "IC", "NA",
+            "SC", "SE", "SF", "SSC", "SSO", "VSV", "XPN", "NNBC", "SY", "VA"
+          ]
+        },
+        "info_stop_filter": {
+          "type" : "stop",
+          "stopwords_path":"info_stop_dict.txt"
         }
       }
     }

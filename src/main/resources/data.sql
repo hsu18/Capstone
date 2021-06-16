@@ -24,7 +24,7 @@ insert into map_sub_tag (category_name, subcategory_name, tag) values ('공학',
 insert into map_sub_tag (category_name, subcategory_name, tag) values ('공학', '전자', '회로,전파,계산,반도체,신호,케이블,라디오,전자,전산');
 insert into map_sub_tag (category_name, subcategory_name, tag) values ('공학', '정보', '멀티미디어,프레젠테이션,콘텐츠,아키텍처,인터넷,데이터,시스템,정보,PMS,디지털');
 insert into map_sub_tag (category_name, subcategory_name, tag) values ('공학', '통신', '선로,전파,유비쿼터스,통신,전화,무선,유선,전신');
-insert into map_sub_tag (category_name, subcategory_name, tag) values ('공학', 'IT', '컴퓨터,캐드,JNCIA,e-test,PC,SW,프로그래머,ICDL,소프트웨어,게임,프로그래밍,비트,GTQ,리눅스,임베디드,엑셀,IT,워드,네트워크,DB,웹,하드웨어,빅데이터,RFID,컴활용,E-TEST,Security,Network');
+insert into map_sub_tag (category_name, subcategory_name, tag) values ('공학', 'IT', '컴퓨터,캐드,JNCIA,e-test,PC,SW,프로그래머,ICDL,소프트웨어,게임,프로그래밍,비트,GTQ,리눅스,임베디드,엑셀,IT,워드,네트워크,DB,웹,하드웨어,빅데이터,RFID,컴활용,E-TEST,Security,Network,정보');
 insert into map_sub_tag (category_name, subcategory_name, tag) values ('음식', '식품', '제과,차사,제빵,폐백,전통차,수산식품,식품,떡,수산물,식육,주류,영양,식품,복어,어간유,제병,차');
 insert into map_sub_tag (category_name, subcategory_name, tag) values ('예체능', '인쇄·사진', '옵셋,조판,스크린,주조조판,식자,제책,사진,인쇄,제판,문선,출판');
 insert into map_sub_tag (category_name, subcategory_name, tag) values ('예체능', '공예', '수편물,나전칠기,울펠트,패세공,리본,방적,원예,골판지,양초,요업,문인화,도자기,색지,포크,염색,조경,인판,단조,펠트,칠기,비즈,클레이,초콜릿,비누,자수,수편,인형,풍선,조각천,폴리머,이오폴리머,귀금속,가구,의장,수자');

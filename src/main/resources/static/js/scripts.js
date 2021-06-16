@@ -29,3 +29,26 @@ function text1() {
         }
     }
 }
+
+function textBold(find){
+    var certName = document.getElementsByClassName("certTdName");
+    if(certName.length == 1) return;
+    for(i=1; i<certName.length; i++) {
+        var regex = new RegExp(find, "g");
+        certName[i].innerHTML = certName[i].innerHTML.replace(regex,
+            "<span class='highlight'>" + find + "</span>");
+    }
+}
+
+function textBold2(find){
+    var certName = document.getElementsByClassName("certName");
+    var certD = document.getElementsByClassName("certD");
+    var regex = new RegExp(find, "g");
+    certName[0].innerHTML = certName[0].innerHTML.replace(regex,
+        "<span class='highlight'>" + find + "</span>");
+    if(certD.length == 0) return;
+    for(i=0; i<certD.length; i++) {
+        certD[i].innerHTML = certD[i].innerHTML.replace(regex,
+            "<span class='highlight'>" + find + "</span>");
+    }
+}

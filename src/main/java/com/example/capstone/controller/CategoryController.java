@@ -82,7 +82,9 @@ public class CategoryController {
     // 카테고리 상세정보 페이지 mapping
     @RequestMapping("/category")
     public String detailCategory(@RequestParam("certid") int certid,
-                                 @RequestParam("userid") int userid, Model model){
+                                 @RequestParam("userid") int userid,
+                                 @RequestParam(value = "searchname", defaultValue = "")
+                                         String searchname, Model model){
         AllCert allCert = categoryService.getAllCertById(Integer.toString(certid));
         categoryService.view_increase(certid, userid);
         String[] tags = null;
@@ -92,6 +94,8 @@ public class CategoryController {
         List<Cert> recommandCerts = categoryService.recommendCerts(Integer.toString(certid),
                 Integer.toString(userid));
 
+
+        model.addAttribute("searchword", searchname);
         model.addAttribute("allCert", allCert);
         model.addAttribute("tags", tags);
         model.addAttribute("relatedCerts", relatedCerts);
@@ -181,9 +185,6 @@ public class CategoryController {
 
         return "mypage";
     }
-
-    //    아래 기능은
-    //    추가 구현 필요
     // login page mapping
     @RequestMapping("/login")
     public String login(){

@@ -51,7 +51,8 @@ public class CategoryService {
 
     //자격증 검색
     public List<EsCert> getCertsByName(String name){
-        return esCertRepository.findEsCertsByName(name);
+        return esCertRepository.findEsCertsByNameOrSummaryOrDutyOrCareer(name, name, name, name);
+        //return esCertRepository.findEsCertsByName(name);
     }
 
     // tag를 갖고있는 자격증 정보 추출
@@ -72,13 +73,17 @@ public class CategoryService {
 
     // category와 name을 갖고있는 자격증 정보 추출
     public List<EsCert> getCertsByNameAndCategory(String searchname, String category){
-        return esCertRepository.findEsCertByNameAndMain(searchname, category);
+        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndMain(searchname, searchname,
+                searchname, searchname, category);
+        //return esCertRepository.findEsCertByNameAndMain(searchname, category);
     }
     public List<EsCert> getCertsByNameAndCategory(String searchname, String category, int mini){
         List<String> subs = crawlingService.findSubs(category);
         String sub = subs.get(mini - 1);
 
-        return esCertRepository.findEsCertByNameAndSub(searchname, sub);
+        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndSub(searchname, searchname,
+                searchname, searchname, sub);
+        //return esCertRepository.findEsCertByNameAndSub(searchname, sub);
     }
 
     // 자격증 id 기준으로 Cert, Date에서 정보 추출 후 AllCert 객체에 저장 후 리턴
@@ -115,9 +120,9 @@ public class CategoryService {
         esCertRepository.refresh();
 
         // 인수로받은 userid로 유저목록 조회 후 등록되지 않았으면 return
-        List<User> users = userRepository.findAll();
-        for(User user : users) {
-            if (user.getId() == userid)
+        List<EsUser> users = esUserRepository.findAll();
+        for(EsUser user : users) {
+            if (user.getId().equals(Integer.toString(userid)))
                 is_user = 1;
         }
         if(is_user == 0) return;
@@ -169,22 +174,27 @@ public class CategoryService {
     public Page<EsCert> getEsCertsByName(int startAt, String name){
         Pageable pageable = PageRequest.of(startAt, 10);
         Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
-        Pageable pageable3 = PageRequest.of(startAt, 10, Sort.by("_score").descending());
-        return esCertRepository.findEsCertsByName(pageable2, name);
+        return esCertRepository.findEsCertsByNameOrSummaryOrDutyOrCareer(pageable2, name, name,
+                name, name);
+        //return esCertRepository.findEsCertsByName(pageable2, name);
     }
 
     public Page<EsCert> searchEsCertsByCategory(int startAt, String searchname, String category){
         Pageable pageable = PageRequest.of(startAt, 10);
         Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
-        return esCertRepository.findEsCertByNameAndMain(pageable2, searchname, category);
+        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndMain(pageable2, searchname,
+                searchname, searchname, searchname, category);
+        //return esCertRepository.findEsCertByNameAndMain(pageable2, searchname, category);
     }
     public Page<EsCert> searchEsCertsByCategory(int startAt, String searchname, String category, int mini){
         List<String> subs = crawlingService.findSubs(category);
         String sub = subs.get(mini - 1);
 
         Pageable pageable = PageRequest.of(startAt, 10);
-        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
-        return esCertRepository.findEsCertByNameAndSub(pageable2, searchname, sub);
+        Pageable pageable2 = PageRequest.of(startAt, 10, Sort.Direction.DESC,"name");
+        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndSub(pageable2, searchname,
+                searchname, searchname, searchname, sub);
+        //return esCertRepository.findEsCertByNameAndSub(pageable2, searchname, sub);
     }
 
     // 연관자격증 알고리즘
@@ -297,13 +307,6 @@ public class CategoryService {
         }
 
         List<Map.Entry<String, Integer>> usrTagSort = new ArrayList<>(usrTagCount.entrySet());
-        // 유사도순으로 정렬인데 어차피 총 자격증 합 구해서 정렬하니 빼도 될듯
-        /*Collections.sort(usrTagSort, new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return o1.getValue() < o2.getValue() ? 1 : -1;
-            }
-        });*/
 
         HashMap<String, Integer> usrRecCount = new HashMap<>(); // 각 자격증의 총 유사도 HashMap
 

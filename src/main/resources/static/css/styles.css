@@ -1,3 +1,7 @@
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 ul {
     list-style: none;
 }
@@ -345,11 +349,6 @@ ul.miniCateUl {
     font-size: 36px;
 }
 
-.tag {
-    margin: 0 auto;
-    text-align: center;
-}
-
 .tagBar {
     display: inline-block;
     margin: 0 6px 20px 0;
@@ -363,6 +362,8 @@ ul.miniCateUl {
 .tag {
     margin: 0 auto;
     text-align: center;
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 20px;
 }
 
 .tagBar {
@@ -385,6 +386,14 @@ ul.miniCateUl {
     font-size: 15px;
 }
 
+.certD {
+    margin-bottom: 20px;
+}
+
+.highlight {
+    font-weight: bold;
+}
+
 .certDetail span {
     padding: 4px 0;
     display: inline-block;
@@ -401,12 +410,35 @@ ul.miniCateUl {
     text-align: center;
     margin: 0 auto;
     /*border: black 1px solid;*/
-    border: 1px solid black;
+    border: 1px solid #DCE0E3;
     border-collapse: collapse;
 }
 
 .scheduleTb td {
-    border: 1px solid black;
+    border: 1px solid #DCE0E3;
+    border-collapse: collapse;
+}
+
+.scheduleTb tr:first-child{
+    background-color: #aed9f7;
+}
+
+.scheduleTb tr:hover {
+    background-color: #DCE0E3;
+}
+.scheduleTb tr:first-child:hover{
+    background-color: #aed9f7;
+}
+
+.bgcolor {
+    background-color: #e6eff2;
+}
+
+.bgcolor2 {
+    border-radius: 50px;
+    margin: 30px 15% 30px 15%;
+    padding: 10px;
+    background-color: white;
 }
 
 .scheduleSortation {
@@ -426,13 +458,17 @@ ul.miniCateUl {
     padding: 5px;
 }
 
+.certBigName {
+    font-family: 'Nanum Myeongjo', serif;
+}
+
 .userRecBar {
     /*display: inline-block;*/
     position: fixed;
     /*margin: 2.5vw;*/
     width: 10vw;
     top: 260px;
-    right: 4vw;
+    right: 20px;
     bottom: 5vh;
     padding: 20px;
     background-color: white;

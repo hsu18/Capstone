@@ -1,15 +1,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-
     <title>세모자 : 세상의 모든 자격증!</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Myeongjo:wght@800&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
     <script type="text/javascript" src="/js/scripts.js"></script>
 </head>
 
 <!-- <body th:onload="test([[${category}]],[[${mini}]] )"> -->
-<body th:onload="text1()">
+<body th:onload="textBold2([[${searchword}]]), text1()">
 <div class="header">
     <div class="smLogo">
         <!-- 로고 내에 home controller -->
@@ -41,56 +41,90 @@
         </li>
     </ul>
 </div>
-<hr>
-<div class="certRec">
-    <span>관련 자격증: </span>
-    <a th:each="relatedCert : ${relatedCerts}" th:href="@{'/category?certid='+${relatedCert.id}+
+<div class="bgcolor">
+    <hr>
+    <div class="bgcolor2">
+        <div class="certRec">
+            <span>관련 자격증: </span>
+            <a th:each="relatedCert : ${relatedCerts}" th:href="@{'/category?certid='+${relatedCert.id}+
         '&userid=1'}" class="certRecA" th:text="${relatedCert.name}"></a>
-</div>
-<div class="certBigName">
-    <span th:text="${allCert.cert.name}"></span>
-</div>
-<div class="tag">
-    <div class="tagBar" th:each="tag : ${tags}">
-        <a class="tag1" th:href="@{'/search/' + ${tag}}" th:text="'#'+${tag}"></a>
-    </div>
-</div>
-<div class="certDetail">
-    <span>자격명:</span>
-    <span class="certName" th:text="${allCert.cert.name}"></span><br>
-    <span>관련부처:</span>
-    <span class="certDepartment" th:text="${allCert.cert.ministry}"></span><br>
-    <span>시행기관:</span>
-    <span class="certInstitution" th:text="${allCert.cert.agency}"></span><br>
-    <span>비용:</span>
-    <span class="certCost" th:text="${allCert.cert.cost}"></span><br>
-    <span class="certUrl">관련 URL:</span>
-    <a target="_blank" class="certUrl certRecA" th:href="@{${allCert.cert.url}}" th:text="${allCert.cert.url}"></a><br>
-</div>
-<div class="scheduleDiv">
-    <table class="scheduleTb">
-        <tr class="scheduleTr">
-            <td class="scheduleSortation">구분</td>
-            <td class="scheduleApplication">접수기간</td>
-            <td class="scheduleTest">시험일정</td>
-            <td class="schedulePass">합격자 발표기간</td>
-        </tr>
-        <tr class="scheduleTr" th:if="${allCert.dates.get(0).getApply().length() == 0}">
-            <td style="font-weight:bold" colspan="4">시험 정보가 없습니다.</td>
-        </tr>
-        <tr class="scheduleTr" th:each="date : ${allCert.dates}" th:if="${date.getApply().length() != 0}">
-            <td class="scheduleSortation" th:text="${date.division}"></td>
-            <td class="scheduleApplication" th:text="${date.apply}"></td>
-            <td class="scheduleTest" th:text="${date.date}"></td>
-            <td class="schedulePass" th:text="${date.notif}"></td>
-        </tr>
-    </table>
-</div>
-<div class="userRecBar">
-    <span>사람들이 함께 본</span>
-    <div th:each="recommendCert : ${recommandCerts}" >
-        <a th:href="@{'/category?certid='+${recommendCert.id}+'&userid=1'}"
-           th:text="${recommendCert.name}"></a>
+        </div>
+        <div class="certBigName">
+            <span th:text="${allCert.cert.name}"></span>
+        </div>
+        <div class="tag">
+            <div class="tagBar" th:each="tag : ${tags}">
+                <a class="tag1" th:href="@{'/search/' + ${tag}}" th:text="'#'+${tag}"></a>
+            </div>
+        </div>
+        <div class="certDetail">
+            <span>● 자격명:</span>
+            <span class="certName" th:text="${allCert.cert.name}"></span><br>
+
+            <span>● 관련부처:</span>
+            <span class="certDepartment" th:if="${allCert.cert.ministry.length() != 0}"
+                  th:text="${allCert.cert.ministry}"></span>
+            <span class="certDepartment" th:unless="${allCert.cert.ministry.length() != 0}">-
+    </span><br>
+
+            <span>● 시행기관:</span>
+            <span class="certInstitution" th:if="${allCert.cert.agency.length() != 0}"
+                  th:text="${allCert.cert.agency}"></span>
+            <span class="certInstitution" th:unless="${allCert.cert.agency.length() != 0}">-
+    </span><br>
+
+            <span>● 비용:</span>
+            <span class="certCost" th:if="${allCert.cert.cost.length() != 0}"
+                  th:text="${allCert.cert.cost}"></span>
+            <span class="certCost" th:unless="${allCert.cert.cost.length() != 0}">-
+    </span><br>
+
+        </div>
+        <div class="scheduleDiv">
+            <table class="scheduleTb">
+                <tr class="scheduleTr">
+                    <td class="scheduleSortation">구분</td>
+                    <td class="scheduleApplication">접수기간</td>
+                    <td class="scheduleTest">시험일정</td>
+                    <td class="schedulePass">합격자 발표기간</td>
+                </tr>
+                <tr class="scheduleTr" th:if="${allCert.dates.get(0).getApply().length() == 0}">
+                    <td style="font-weight:bold" colspan="4">시험 정보가 없습니다.</td>
+                </tr>
+                <tr class="scheduleTr" th:each="date : ${allCert.dates}" th:if="${date.getApply().length() != 0}">
+                    <td class="scheduleSortation" th:text="${date.division}"></td>
+                    <td class="scheduleApplication" th:text="${date.apply}"></td>
+                    <td class="scheduleTest" th:text="${date.date}"></td>
+                    <td class="schedulePass" th:text="${date.notif}"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="certDetail">
+            <span th:if="${allCert.cert.summary.length() != 0}">● 개요 :</span>
+            <span class="certD" th:if="${allCert.cert.summary.length() != 0}"
+                  th:text="${allCert.cert.summary}"></span><br>
+
+            <span th:if="${allCert.cert.duty.length() != 0}">● 수행직무 :</span>
+            <span class="certD" th:if="${allCert.cert.duty.length() != 0}"
+                  th:text="${allCert.cert.duty}"></span><br>
+
+            <span th:if="${allCert.cert.career.length() != 0}">● 진로 및 전망 :</span>
+            <span class="certD" th:if="${allCert.cert.career.length() != 0}"
+                  th:text="${allCert.cert.career}"></span><br>
+
+            <br><span class="certUrl">※ 관련 URL:</span>
+            <a target="_blank" class="certUrl certRecA" th:href="@{${allCert.cert.url}}"
+               th:text="${allCert.cert.url}"></a><br>
+        </div>
+
+        <div class="userRecBar">
+            <span>사람들이 함께 본</span>
+            <div th:each="recommendCert : ${recommandCerts}" >
+                <a th:href="@{'/category?certid='+${recommendCert.id}+'&userid=1'}"
+                   th:text="${recommendCert.name}"></a>
+            </div>
+        </div>
     </div>
 </div>
 </body>

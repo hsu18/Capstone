@@ -44,6 +44,15 @@ public class EsCert {
     @Field(type = FieldType.Text, name = "sub")
     private String sub;
 
+    @Field(type = FieldType.Text, name = "summary")
+    private String summary;
+
+    @Field(type = FieldType.Text, name = "duty")
+    private String duty;
+
+    @Field(type = FieldType.Text, name = "career")
+    private String career;
+
     @Field(type = FieldType.Date, name = "modified_time")
     private Date modified_time;
 }
