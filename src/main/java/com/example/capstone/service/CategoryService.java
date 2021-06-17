@@ -51,8 +51,25 @@ public class CategoryService {
 
     //자격증 검색
     public List<EsCert> getCertsByName(String name){
-        return esCertRepository.findEsCertsByNameOrSummaryOrDutyOrCareer(name, name, name, name);
-        //return esCertRepository.findEsCertsByName(name);
+        List<EsCert> list = new ArrayList<EsCert>();
+        list.addAll(esCertRepository.findEsCertsByName(name));
+        list.addAll(esCertRepository.findEsCertsBySummary(name));
+        list.addAll(esCertRepository.findEsCertsByDuty(name));
+        list.addAll(esCertRepository.findEsCertsByCareer(name));
+
+        List<EsCert> compareList = new ArrayList<EsCert>();
+
+        int is_same = 0;
+        for(EsCert e : list){
+            for(EsCert comp : compareList) {
+                if (comp.getId().equals(e.getId()))
+                    is_same = 1;
+            }
+            if(is_same == 0) compareList.add(e);
+            is_same = 0;
+        }
+
+        return compareList;
     }
 
     // tag를 갖고있는 자격증 정보 추출
@@ -73,17 +90,47 @@ public class CategoryService {
 
     // category와 name을 갖고있는 자격증 정보 추출
     public List<EsCert> getCertsByNameAndCategory(String searchname, String category){
-        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndMain(searchname, searchname,
-                searchname, searchname, category);
-        //return esCertRepository.findEsCertByNameAndMain(searchname, category);
+
+        List<EsCert> list = new ArrayList<EsCert>();
+        list.addAll(esCertRepository.findEsCertByNameAndMain(searchname, category));
+        list.addAll(esCertRepository.findEsCertsBySummaryAndMain(searchname, category));
+        list.addAll(esCertRepository.findEsCertsByDutyAndMain(searchname, category));
+        list.addAll(esCertRepository.findEsCertsByCareerAndMain(searchname, category));
+
+        List<EsCert> compareList = new ArrayList<EsCert>();
+
+        int is_same = 0;
+        for(EsCert e : list){
+            for(EsCert comp : compareList) {
+                if (comp.getId().equals(e.getId()))
+                    is_same = 1;
+            }
+            if(is_same == 0) compareList.add(e);
+            is_same = 0;
+        }
+        return compareList;
     }
     public List<EsCert> getCertsByNameAndCategory(String searchname, String category, int mini){
         List<String> subs = crawlingService.findSubs(category);
         String sub = subs.get(mini - 1);
 
-        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndSub(searchname, searchname,
-                searchname, searchname, sub);
-        //return esCertRepository.findEsCertByNameAndSub(searchname, sub);
+        List<EsCert> list = new ArrayList<EsCert>();
+        list.addAll(esCertRepository.findEsCertByNameAndSub(searchname, sub));
+        list.addAll(esCertRepository.findEsCertsBySummaryAndSub(searchname, sub));
+        list.addAll(esCertRepository.findEsCertsByDutyAndSub(searchname, sub));
+        list.addAll(esCertRepository.findEsCertsByCareerAndSub(searchname, sub));
+
+        List<EsCert> compareList = new ArrayList<EsCert>();
+        int is_same = 0;
+        for(EsCert e : list){
+            for(EsCert comp : compareList) {
+                if (comp.getId().equals(e.getId()))
+                    is_same = 1;
+            }
+            if(is_same == 0) compareList.add(e);
+            is_same = 0;
+        }
+        return compareList;
     }
 
     // 자격증 id 기준으로 Cert, Date에서 정보 추출 후 AllCert 객체에 저장 후 리턴
@@ -174,27 +221,39 @@ public class CategoryService {
     public Page<EsCert> getEsCertsByName(int startAt, String name){
         Pageable pageable = PageRequest.of(startAt, 10);
         Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
-        return esCertRepository.findEsCertsByNameOrSummaryOrDutyOrCareer(pageable2, name, name,
-                name, name);
-        //return esCertRepository.findEsCertsByName(pageable2, name);
+
+        List<EsCert> list = getCertsByName(name);
+        List<String> ids = new ArrayList<>();
+        for(EsCert e : list){
+            ids.add(e.getId());
+        }
+
+        return esCertRepository.findEsCertsByIdIn(pageable2, ids);
     }
 
     public Page<EsCert> searchEsCertsByCategory(int startAt, String searchname, String category){
         Pageable pageable = PageRequest.of(startAt, 10);
         Pageable pageable2 = PageRequest.of(startAt, 10, Sort.by(new Sort.Order(Sort.Direction.DESC,"name")));
-        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndMain(pageable2, searchname,
-                searchname, searchname, searchname, category);
-        //return esCertRepository.findEsCertByNameAndMain(pageable2, searchname, category);
+
+        List<EsCert> list = getCertsByNameAndCategory(searchname, category);
+        List<String> ids = new ArrayList<>();
+        for(EsCert e : list){
+            ids.add(e.getId());
+        }
+
+        return esCertRepository.findEsCertsByIdIn(pageable2, ids);
     }
     public Page<EsCert> searchEsCertsByCategory(int startAt, String searchname, String category, int mini){
-        List<String> subs = crawlingService.findSubs(category);
-        String sub = subs.get(mini - 1);
 
         Pageable pageable = PageRequest.of(startAt, 10);
         Pageable pageable2 = PageRequest.of(startAt, 10, Sort.Direction.DESC,"name");
-        return esCertRepository.findEsCertByNameOrSummaryOrDutyOrCareerAndSub(pageable2, searchname,
-                searchname, searchname, searchname, sub);
-        //return esCertRepository.findEsCertByNameAndSub(pageable2, searchname, sub);
+
+        List<EsCert> list = getCertsByNameAndCategory(searchname, category, mini);
+        List<String> ids = new ArrayList<>();
+        for(EsCert e : list){
+            ids.add(e.getId());
+        }
+        return esCertRepository.findEsCertsByIdIn(pageable2, ids);
     }
 
     // 연관자격증 알고리즘

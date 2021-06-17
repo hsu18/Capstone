@@ -93,7 +93,7 @@ public class CrawlingService {
 
             Meta meta = new Meta();
 
-            if (jmCd == 5415 || jmCd == 8918 || jmCd == 9101 || jmCd == 9439 || jmCd == 9440 || ((9749 < jmCd) && (jmCd < 9753)) || ((9550 < jmCd) && (jmCd < 9563))) {
+            if (jmCd == 5415 || jmCd == 8918 || jmCd == 9101 || jmCd == 9439 || jmCd == 9440 || ((9749 < jmCd) && (jmCd < 9753)) || ((9550 < jmCd) && (jmCd < 9563)) || (9610 < jmCd) && (jmCd < 9614)) {
                 meta.setIs_succeed("FAIL");
                 meta.setUrl(certUrl);
                 metaRepository.saveAndFlush(meta);
