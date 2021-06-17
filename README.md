@@ -40,6 +40,7 @@
 2-3. **관련기술 및 개발도구**
 
 **관련기술:**
+
 - Elasticsearch/Logstash
 - Spring Boot
 - Spring Data JPA/Hibernate
@@ -47,6 +48,7 @@
 - Crawling(Jsoup)
 
 **개발도구:**
+
 - IntelliJ
 - Gradle
 - MySQL
